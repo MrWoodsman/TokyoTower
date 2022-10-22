@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./icon.png">
+    <title>Tokyo Tower</title>
+</head>
+<body>
+    <section class="container">
+        <a class="link">Tokyo Tower</a>
+        <span class="hover-container">
+            <span class="link-text" aria-hidden="true">Tokyo Tower</span>
+            <span class="image-container">
+                <span class="image-inner">
+                    <img class="link-image" src="https://www.smartage.pl/wp-content/uploads/2018/02/3-17.jpg" alt="Tokyo Tower">
+                </span>
+            </span>
+        </span>
+    </section>
+</body>
+    <script>
+        const linkText = document.querySelector('.link-text')
+        const linkImage = document.querySelector('.link-image')
+
+        function showImg(e) {
+            x = e.clientX
+            y = e.clientY
+            linkImage.style.transform = `translate3d(${x}px, ${y}px, 0)`
+            linkText.style.setProperty('--x', (x)+'px')
+            linkText.style.setProperty('--y', (y)+'px')
+        }
+
+        function showImg2(e) {
+            // let x = 0, y = 0;
+
+            if (event.touches && event.touches[0]) {
+                x = event.touches[0].clientX;
+                y = event.touches[0].clientY;
+            } else if (event.originalEvent && event.originalEvent.changedTouches[0]) {
+                x = event.originalEvent.changedTouches[0].clientX;
+                y = event.originalEvent.changedTouches[0].clientY;
+            } else if (event.clientX && event.clientY) {
+                x = event.clientX;
+                y = event.clientY;
+            }
+            linkImage.style.transform = `translate3d(${x}px, ${y}px, 0)`
+            linkText.style.setProperty('--x', (x)+'px')
+            linkText.style.setProperty('--y', (y)+'px')
+        }
+
+        document.addEventListener('mousemove', showImg)
+        window.addEventListener('touchstart', showImg2);
+        window.addEventListener('touchmove', showImg2);
+        window.addEventListener('touchend', showImg2);
+    </script>
+</html>
